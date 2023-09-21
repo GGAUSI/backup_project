@@ -1,4 +1,4 @@
-
+#!/bin/bash
 if [ ! -e "/app/data/backup_list.txt" ]; then
     touch "/app/data/backup_list.txt"
 fi
@@ -15,7 +15,6 @@ fi
 
 
 
-#!/bin/bash
 welcome_message() {
     echo "***********************"
     echo "Welcome to your SMART backup utility"
@@ -42,10 +41,10 @@ validate_and_append() {
     fi
 
     # Check if the specified path is readable within the container
-    #if [ ! -r " /app/data/$user_input" ]; then
-        #echo "Permission denied. You do not have read access to the specified path."
-        #exit 1
-    #fi
+    if [ ! -r " /app/data/$user_input" ]; then
+        echo "Permission denied. You do not have read access to the specified path."
+        exit 1
+    fi
 
     # Check if the path already exists in the backup list
     if grep -Fxq "$user_input" /app/data/backup_list.txt; then
